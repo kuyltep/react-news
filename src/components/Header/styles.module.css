@@ -1,0 +1,23 @@
+.header {
+  padding: 12px 24px;
+  background: white;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid #f2f4f5;
+}
+
+.title {
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+  color: #090a0a;
+}
+
+.date {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #090a0a;
+}
