@@ -1,7 +1,7 @@
-import { formatTimeAgo } from "../../helpers/formatTimeAgo";
+import { formatTimeAgo } from "../../../helpers/formatTimeAgo";
 import { NewsBannerPropsI } from "./types/NewsBannerPropsI";
 import classes from "./styles.module.css";
-import Image from "../Image/Image";
+import Image from "../../Image/Image";
 function NewsBanner({ author, published, title, image }: NewsBannerPropsI) {
   return (
     <div className={classes.banner}>

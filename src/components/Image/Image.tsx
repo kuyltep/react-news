@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 function Image({ image }: ImageI) {
   return (
     <div className={styles.wrapper}>
-      {image ? (
+      {image && image !== "None" ? (
         <img className={styles.image} src={image} alt="News Image" />
       ) : null}
     </div>

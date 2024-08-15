@@ -1,0 +1,22 @@
+.news-item {
+  display: grid;
+  grid-template-columns: 0.25fr 0.75fr;
+  grid-gap: 16px;
+  width: 100%;
+}
+
+.news-description {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.info {
+  font-size: 12px;
+  color: #6c7072;
+}
