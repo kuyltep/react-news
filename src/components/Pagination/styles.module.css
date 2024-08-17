@@ -1,0 +1,50 @@
+.pagination {
+  padding-top: 30px;
+  display: flex;
+  gap: 12px;
+  overflow-x: scroll;
+  width: 100%;
+  align-items: center;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.pages {
+  display: flex;
+  gap: 10px;
+}
+
+.active:disabled,
+.button:disabled {
+  cursor: default;
+}
+
+.active {
+  color: #6b4eff;
+  font-size: 16px;
+  background: #e7e7ff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 50%;
+}
+
+.default {
+  font-size: 16px;
+  background: #f2f4f5;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.button {
+  color: #6b4eff;
+  font-size: 16px;
+  background: #e7e7ff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
