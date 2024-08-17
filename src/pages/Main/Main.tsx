@@ -5,14 +5,17 @@ import { NewsI } from "../../api/types/NewsI";
 import NewsList from "../../components/News/NewsList/NewsList";
 import Skeleton from "../../components/Skeleton/Skeleton";
 import Pagination from "../../components/Pagination/Pagination";
+import Categories from "../../components/Categories/Categories";
 
 function Main() {
   const [news, setNews] = useState<NewsI[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState<number>(1);
   const totalPages = 10;
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState<number>(10);
+
+  const [category, setCategory] = useState<string>("");
   const fetchNews = async () => {
     try {
       setIsLoading(true);
@@ -20,6 +23,7 @@ function Main() {
         endpoint: "search",
         page_number: pageNumber,
         page_size: pageSize,
+        category,
       });
       if (response && response.news.length) {
         setNews(response.news);
@@ -31,9 +35,10 @@ function Main() {
   };
   useEffect(() => {
     fetchNews();
-  }, [pageNumber]);
+  }, [pageNumber, category]);
   return (
     <div>
+      <Categories activeCategory={category} setActiveCategory={setCategory} />
       {news.length > 0 && !isLoading ? (
         <NewsBanner
           author={news[0].author}
