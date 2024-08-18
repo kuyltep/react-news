@@ -14,3 +14,9 @@ export interface ResponseI {
   news: NewsI[];
   page: number;
 }
+
+export interface CategoriesResponseI {
+  status: string;
+  description: string;
+  categories: string[];
+}
