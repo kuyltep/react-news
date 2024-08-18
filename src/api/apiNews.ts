@@ -10,6 +10,7 @@ export const getNews = async ({
   page_number = 1,
   page_size = 10,
   category = "",
+  keywords = "",
 }: ApiParamsI): Promise<ResponseI | undefined> => {
   try {
     const response = await axios.get(`${BASE_URL}${endpoint}`, {
@@ -18,6 +19,7 @@ export const getNews = async ({
         page_size,
         apiKey: API_KEY,
         category,
+        keywords,
       },
     });
     return response.data;

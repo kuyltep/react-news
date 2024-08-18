@@ -3,4 +3,5 @@ export interface ApiParamsI {
   page_number?: number;
   page_size?: number;
   category?: string;
+  keywords?: string;
 }
