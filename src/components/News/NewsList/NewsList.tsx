@@ -1,4 +1,5 @@
 import { NewsI } from "../../../api/types/NewsI";
+import withSkeleton from "../../../helpers/hocs/withSceleton";
 import NewsItem from "../NewsItem/NewsItem";
 import styles from "./styles.module.css";
 function NewsList({ news }: { news: NewsI[] }) {
@@ -23,4 +24,6 @@ function NewsList({ news }: { news: NewsI[] }) {
   );
 }
 
-export default NewsList;
+const NewsListWithSkeleton = withSkeleton(NewsList, "item", 10);
+
+export default NewsListWithSkeleton;

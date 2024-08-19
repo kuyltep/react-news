@@ -1,6 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-
 export interface CategoriesPropsI {
   activeCategory: string;
-  setActiveCategory: Dispatch<SetStateAction<string>>;
+  setActiveCategory: (key: string, value: string | number) => void;
 }

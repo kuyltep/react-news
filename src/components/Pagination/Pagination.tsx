@@ -8,7 +8,7 @@ function Pagination({
   const checkIsAvailablePage = (action: number) => {
     const resultPage = activePage + action;
     if (resultPage <= totalPages && resultPage >= 1) {
-      setActivePage(resultPage);
+      setActivePage("page_number", resultPage);
     }
   };
 
@@ -30,7 +30,7 @@ function Pagination({
               className={
                 index + 1 === activePage ? styles.active : styles.default
               }
-              onClick={() => setActivePage(index + 1)}
+              onClick={() => setActivePage("page_number", index + 1)}
             >
               {index + 1}
             </button>

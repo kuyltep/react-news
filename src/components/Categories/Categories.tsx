@@ -2,26 +2,24 @@ import { useEffect, useState } from "react";
 import { getCategories } from "../../api/apiNews";
 import styles from "./styles.module.css";
 import { CategoriesPropsI } from "./types/CategoriesPropsI";
+import useFetch from "../../helpers/hooks/useFetch";
+import CategoriesFetchI from "./types/CategoriesFetchI";
 function Categories({ activeCategory, setActiveCategory }: CategoriesPropsI) {
-  const [categories, setCategories] = useState<string[]>([]);
-
-  const fetchCategories = async () => {
-    try {
-      const fetchedCategories = await getCategories();
-      if (fetchedCategories && fetchedCategories.categories.length) {
-        setCategories(["All", ...fetchedCategories.categories]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-  return (
+  const {
+    data: dataCategories,
+    error,
+    isLoading,
+  }: CategoriesFetchI = useFetch(getCategories);
+  return dataCategories && dataCategories?.categories ? (
     <div className={styles.categories}>
-      {categories.map((category, index) => {
+      <button
+        className={!activeCategory.length ? styles.active : styles.category}
+        disabled={activeCategory === ""}
+        onClick={() => setActiveCategory("category", "")}
+      >
+        All
+      </button>
+      {dataCategories.categories.map((category, index) => {
         return (
           <button
             className={
@@ -32,7 +30,7 @@ function Categories({ activeCategory, setActiveCategory }: CategoriesPropsI) {
             }
             disabled={category === activeCategory}
             onClick={() =>
-              setActiveCategory(category === "All" ? "" : category)
+              setActiveCategory("category", category === "All" ? "" : category)
             }
             key={index}
           >
@@ -41,7 +39,7 @@ function Categories({ activeCategory, setActiveCategory }: CategoriesPropsI) {
         );
       })}
     </div>
-  );
+  ) : null;
 }
 
 export default Categories;
