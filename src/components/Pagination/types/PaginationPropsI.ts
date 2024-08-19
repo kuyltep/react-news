@@ -1,7 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-
 export interface PaginationPropsI {
   activePage: number;
-  setActivePage: Dispatch<SetStateAction<number>>;
+  setActivePage: (key: string, value: string | number) => void;
   totalPages: number;
 }

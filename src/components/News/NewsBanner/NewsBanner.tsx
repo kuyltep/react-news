@@ -2,7 +2,9 @@ import { formatTimeAgo } from "../../../helpers/formatTimeAgo";
 import { NewsBannerPropsI } from "./types/NewsBannerPropsI";
 import classes from "./styles.module.css";
 import Image from "../../Image/Image";
-function NewsBanner({ author, published, title, image }: NewsBannerPropsI) {
+import withSkeleton from "../../../helpers/hocs/withSceleton";
+function NewsBanner(news: NewsBannerPropsI) {
+  const { author, image, published, title } = news;
   return (
     <div className={classes.banner}>
       <Image image={image} />
@@ -13,5 +15,6 @@ function NewsBanner({ author, published, title, image }: NewsBannerPropsI) {
     </div>
   );
 }
+const NewsBannerWithSkeleton = withSkeleton(NewsBanner, "banner", 1);
 
-export default NewsBanner;
+export default NewsBannerWithSkeleton;
