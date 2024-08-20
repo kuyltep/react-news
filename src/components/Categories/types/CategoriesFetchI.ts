@@ -1,7 +1,7 @@
 import { CategoriesResponseI } from "../../../api/types/NewsI";
 
 export default interface CategoriesFetchI {
-  data: CategoriesResponseI | object;
+  data: CategoriesResponseI;
   isLoading: boolean;
   error: unknown;
 }

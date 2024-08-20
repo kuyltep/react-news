@@ -24,6 +24,6 @@ function NewsList({ news }: { news: NewsI[] }) {
   );
 }
 
-const NewsListWithSkeleton = withSkeleton(NewsList, "item", 10);
+const NewsListWithSkeleton = withSkeleton(NewsList, "item", 10, "row");
 
 export default NewsListWithSkeleton;
