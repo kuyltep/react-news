@@ -42,3 +42,16 @@ export const getCategories = async (): Promise<
     console.log(error);
   }
 };
+
+export const getLatestNews = async (): Promise<ResponseI | undefined> => {
+  try {
+    const response = await axios.get(`${BASE_URL}latest-news`, {
+      params: {
+        apiKey: API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
