@@ -1,8 +1,7 @@
 import { TOTAL_PAGES } from "../../constants/constants";
-import Categories from "../Categories/Categories";
 import NewsList from "../News/NewsList/NewsList";
+import NewsFilters from "../NewsFilters/NewsFilters";
 import Pagination from "../Pagination/Pagination";
-import Search from "../Search/Search";
 import styles from "./styles.module.css";
 import { NewsByFiltersI } from "./types/NewsByFiltersI";
 function NewsByFilters({
@@ -15,11 +14,12 @@ function NewsByFilters({
 }: NewsByFiltersI) {
   return (
     <section className={styles.section}>
-      <Categories
-        activeCategory={filters.category}
-        setActiveCategory={changeFilter}
+      <NewsFilters
+        changeFilter={changeFilter}
+        filters={filters}
+        keywords={keywords}
+        setKeywords={setKeywords}
       />
-      <Search keywords={keywords} setKeywords={setKeywords} />
       <Pagination
         activePage={filters.page_number}
         totalPages={TOTAL_PAGES}
