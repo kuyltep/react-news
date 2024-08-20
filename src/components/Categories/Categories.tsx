@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { getCategories } from "../../api/apiNews";
 import styles from "./styles.module.css";
 import { CategoriesPropsI } from "./types/CategoriesPropsI";
