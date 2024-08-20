@@ -1,10 +1,15 @@
+import useFetch from "../../helpers/hooks/useFetch";
 import BannersListWithSkeleton from "../BannersList/BannersList";
-import { LatestNewsPropsI } from "./types/LatestNewsPropsI";
+import { getLatestNews } from "../../api/apiNews";
 
-function LatestNews({ banners, isLoading }: LatestNewsPropsI) {
+function LatestNews() {
+  const { data, isLoading } = useFetch(getLatestNews);
   return (
     <section>
-      <BannersListWithSkeleton banners={banners} isLoading={isLoading} />
+      <BannersListWithSkeleton
+        banners={data && data.news}
+        isLoading={isLoading}
+      />
     </section>
   );
 }
