@@ -1,15 +1,12 @@
-import NewsBanner from "../../components/News/NewsBanner/NewsBanner";
 import { getNews } from "../../api/apiNews";
-import NewsList from "../../components/News/NewsList/NewsList";
-import Pagination from "../../components/Pagination/Pagination";
-import Categories from "../../components/Categories/Categories";
-import Search from "../../components/Search/Search";
 import useDebounce from "../../helpers/hooks/useDebounce";
-import { PAGE_SIZE, TOTAL_PAGES } from "../../constants/constants";
+import { PAGE_SIZE } from "../../constants/constants";
 import useFetch from "../../helpers/hooks/useFetch";
 import { useState } from "react";
 import { useFilters } from "../../helpers/hooks/useFilters";
-
+import LatestNews from "../../components/LatestNews/LatestNews";
+import styles from "./styles.module.css";
+import NewsByFilters from "../../components/NewsByFilters/NewsByFilters";
 function Main() {
   const [keywords, setKeywords] = useState<string>("");
   const debouncedKeywords = useDebounce(keywords, 1500);
@@ -29,24 +26,18 @@ function Main() {
     keywords: debouncedKeywords,
   });
   return (
-    <div>
-      <Categories
-        activeCategory={filters.category}
-        setActiveCategory={changeFilter}
-      />
-      <Search keywords={keywords} setKeywords={setKeywords} />
-      <NewsBanner
-        isLoading={isLoading}
-        news={dataNews?.news && dataNews.news.length && dataNews.news[0]}
-      />
-      <NewsList
-        news={dataNews?.news && dataNews.news.length && dataNews.news}
+    <div className={styles.main}>
+      <LatestNews
+        banners={dataNews?.news && dataNews.news}
         isLoading={isLoading}
       />
-      <Pagination
-        activePage={filters.page_number}
-        totalPages={TOTAL_PAGES}
-        setActivePage={changeFilter}
+      <NewsByFilters
+        changeFilter={changeFilter}
+        dataNews={dataNews}
+        filters={filters}
+        isLoading={isLoading}
+        keywords={keywords}
+        setKeywords={setKeywords}
       />
     </div>
   );
