@@ -5,15 +5,13 @@ import { ApiParamsI } from "./types/ApiParamsI";
 const BASE_URL = import.meta.env.VITE_NEWS_API_BASE_URL;
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 
-export const getNews = async ({
-  endpoint,
-  page_number = 1,
-  page_size = 10,
-  category = "",
-  keywords = "",
-}: ApiParamsI): Promise<ResponseI | undefined> => {
+export const getNews = async (
+  params?: Partial<ApiParamsI>
+): Promise<ResponseI> => {
   try {
-    const response = await axios.get(`${BASE_URL}${endpoint}`, {
+    const { endpoint, page_number, page_size, category, keywords } =
+      params || {};
+    const response = await axios.get<ResponseI>(`${BASE_URL}${endpoint}`, {
       params: {
         page_number,
         page_size,
@@ -25,14 +23,38 @@ export const getNews = async ({
     return response.data;
   } catch (error) {
     console.log(error);
+    return {
+      news: [],
+      status: "error",
+      page: 1,
+    };
   }
 };
 
-export const getCategories = async (): Promise<
-  CategoriesResponseI | undefined
-> => {
+export const getCategories = async (): Promise<CategoriesResponseI> => {
   try {
-    const response = await axios.get(`${BASE_URL}available/categories`, {
+    const response = await axios.get<CategoriesResponseI>(
+      `${BASE_URL}available/categories`,
+      {
+        params: {
+          apiKey: API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return {
+      status: "error",
+      description: "",
+      categories: [],
+    };
+  }
+};
+
+export const getLatestNews = async (): Promise<ResponseI> => {
+  try {
+    const response = await axios.get<ResponseI>(`${BASE_URL}latest-news`, {
       params: {
         apiKey: API_KEY,
       },
@@ -40,18 +62,10 @@ export const getCategories = async (): Promise<
     return response.data;
   } catch (error) {
     console.log(error);
-  }
-};
-
-export const getLatestNews = async (): Promise<ResponseI | undefined> => {
-  try {
-    const response = await axios.get(`${BASE_URL}latest-news`, {
-      params: {
-        apiKey: API_KEY,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.log(error);
+    return {
+      news: [],
+      status: "error",
+      page: 1,
+    };
   }
 };

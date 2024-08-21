@@ -1,14 +1,24 @@
-import { ErrorInfo, useEffect, useState } from "react";
-import { getNews } from "../../api/apiNews";
-import { PAGE_SIZE } from "../../constants/constants";
-import { NewsI } from "../../api/types/NewsI";
+import { useEffect, useState } from "react";
 
-function useFetch(fetchFunction, params?) {
-  const [data, setData] = useState(null);
+interface FetchFunction<P, T> {
+  (params?: P): Promise<T>;
+}
+
+interface UseFetchResult<T> {
+  data: T | undefined | null;
+  isLoading: boolean;
+  error: Error | null;
+}
+
+function useFetch<T, P>(
+  fetchFunction: FetchFunction<P, T>,
+  params?: P
+): UseFetchResult<T> {
+  const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<Error | null>(null);
 
-  const stringParams = new URLSearchParams(params).toString();
+  const stringParams = params ? new URLSearchParams(params).toString() : "";
 
   useEffect(() => {
     (async () => {
@@ -17,7 +27,7 @@ function useFetch(fetchFunction, params?) {
         const result = await fetchFunction(params);
         setData(result);
       } catch (error) {
-        setError(error);
+        setError(error as Error);
       } finally {
         setIsLoading(false);
       }

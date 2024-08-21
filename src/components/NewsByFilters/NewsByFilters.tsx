@@ -8,6 +8,8 @@ import useDebounce from "../../helpers/hooks/useDebounce";
 import { useFilters } from "../../helpers/hooks/useFilters";
 import useFetch from "../../helpers/hooks/useFetch";
 import { getNews } from "../../api/apiNews";
+import { ResponseI } from "../../api/types/NewsI";
+import { ApiParamsI } from "../../api/types/ApiParamsI";
 function NewsByFilters() {
   const [keywords, setKeywords] = useState<string>("");
   const debouncedKeywords = useDebounce(keywords, 1500);
@@ -18,11 +20,10 @@ function NewsByFilters() {
     category: "",
     keywords: debouncedKeywords,
   });
-  const {
-    data: dataNews,
-    error,
-    isLoading,
-  } = useFetch(getNews, {
+  const { data: dataNews, isLoading } = useFetch<
+    ResponseI,
+    Partial<ApiParamsI>
+  >(getNews, {
     ...filters,
     keywords: debouncedKeywords,
   });
@@ -39,10 +40,7 @@ function NewsByFilters() {
         totalPages={TOTAL_PAGES}
         setActivePage={changeFilter}
       />
-      <NewsList
-        news={dataNews?.news && dataNews.news.length && dataNews.news}
-        isLoading={isLoading}
-      />
+      <NewsList news={dataNews?.news && dataNews.news} isLoading={isLoading} />
     </section>
   );
 }
