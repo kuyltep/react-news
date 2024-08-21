@@ -2,10 +2,10 @@ import { NewsI } from "../../../api/types/NewsI";
 import withSkeleton from "../../../helpers/hocs/withSceleton";
 import NewsItem from "../NewsItem/NewsItem";
 import styles from "./styles.module.css";
-function NewsList({ news }: { news: NewsI[] }) {
+function NewsList({ news }: { news?: NewsI[] | null }) {
   return (
     <ul className={styles["news-list"]}>
-      {news.map((item) => {
+      {news?.map((item) => {
         return (
           <NewsItem
             key={item.id}
