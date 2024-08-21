@@ -2,7 +2,7 @@ import withSkeleton from "../../helpers/hocs/withSceleton";
 import { LatestNewsPropsI } from "../LatestNews/types/LatestNewsPropsI";
 import NewsBanner from "../News/NewsBanner/NewsBanner";
 import styles from "./styles.module.css";
-export function BannersList({ banners, isLoading }: LatestNewsPropsI) {
+export function BannersList({ banners }: LatestNewsPropsI) {
   return (
     <ul className={styles.banners}>
       {banners?.map((item) => {
@@ -20,7 +20,7 @@ export function BannersList({ banners, isLoading }: LatestNewsPropsI) {
   );
 }
 
-const BannersListWithSkeleton = withSkeleton(
+const BannersListWithSkeleton = withSkeleton<LatestNewsPropsI>(
   BannersList,
   "banner",
   10,

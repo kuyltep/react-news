@@ -4,7 +4,12 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 12px;
   box-sizing: border-box;
-  max-height: 1200px;
-  overflow-y: scroll;
-  scrollbar-width: none;
+}
+
+@media (min-width: 769px) {
+  .banners {
+    max-height: 1200px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
 }
