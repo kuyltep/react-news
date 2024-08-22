@@ -1,6 +1,11 @@
 import { useState } from "react";
-import FiltersI from "./types/filtersI";
-
+export interface FiltersI {
+  endpoint: string;
+  keywords: string;
+  category: string;
+  page_number: number;
+  page_size: number;
+}
 export const useFilters = (initalFilters: FiltersI) => {
   const [filters, setFilters] = useState<FiltersI>(initalFilters);
 
