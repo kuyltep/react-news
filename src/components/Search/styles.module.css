@@ -17,3 +17,15 @@
 .input:focus {
   outline: none;
 }
+
+.dark .input {
+  background-color: #2e323c;
+  color: white;
+  border: 3px solid #3c4250;
+}
+
+.light .input {
+  border: 3px solid #e7e7ff;
+  background: #f2f4f5;
+  color: #6b4eff;
+}
