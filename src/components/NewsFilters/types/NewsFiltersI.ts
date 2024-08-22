@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import FiltersI from "../../../helpers/hooks/types/filtersI";
+import { FiltersI } from "../../../helpers/hooks/useFilters";
 
 export interface NewsFiltersI {
   filters: FiltersI;

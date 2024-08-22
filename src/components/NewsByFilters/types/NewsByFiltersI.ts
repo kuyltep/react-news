@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ResponseI } from "../../../api/types/NewsI";
-import FiltersI from "../../../helpers/hooks/types/filtersI";
+import { FiltersI } from "../../../helpers/hooks/useFilters";
 
 export interface NewsByFiltersI {
   filters: FiltersI;
