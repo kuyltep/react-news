@@ -10,3 +10,19 @@
   background-color: white;
   cursor: pointer;
 }
+
+.dark {
+  background-color: #23272f;
+}
+
+.light {
+  background-color: white;
+}
+
+.dark .arrow {
+  background-color: #23272f;
+}
+
+.light .arrow {
+  background-color: white;
+}

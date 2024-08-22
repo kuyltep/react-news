@@ -49,3 +49,22 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.dark {
+  background-color: #23272f;
+}
+
+.light {
+  background-color: white;
+}
+
+.dark .default {
+  background-color: #23272f;
+  border: 1px solid #3f4655;
+  color: white;
+  font-weight: 300;
+}
+
+.light .default {
+  background-color: #f2f4f5;
+}
