@@ -1,5 +1,6 @@
 import { PaginationPropsI } from "./types/PaginationPropsI";
 import styles from "./styles.module.css";
+import { useTheme } from "../../context/theme";
 function Pagination({
   activePage,
   totalPages,
@@ -12,8 +13,12 @@ function Pagination({
     }
   };
 
+  const { isDark } = useTheme();
+
   return (
-    <div className={styles.pagination}>
+    <div
+      className={`${styles.pagination} ${isDark ? styles.dark : styles.light}`}
+    >
       <button
         className={styles.button}
         onClick={() => checkIsAvailablePage(-1)}

@@ -30,3 +30,22 @@
 .active:disabled {
   cursor: default;
 }
+
+.categories.dark {
+  background-color: #23272f;
+}
+
+.categories.light {
+  background-color: white;
+}
+
+.categories.light .category {
+  background: #f2f4f5;
+}
+
+.categories.dark .category {
+  background-color: #23272f;
+  border: 1px solid #3f4655;
+  color: white;
+  font-weight: 300;
+}

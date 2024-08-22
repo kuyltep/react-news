@@ -4,6 +4,7 @@ import { CategoriesPropsI } from "./types/CategoriesPropsI";
 import useFetch from "../../helpers/hooks/useFetch";
 import { ForwardedRef, forwardRef } from "react";
 import { CategoriesResponseI } from "../../api/types/NewsI";
+import { useTheme } from "../../context/theme";
 const Categories = forwardRef(
   (
     { activeCategory, setActiveCategory }: CategoriesPropsI,
@@ -12,8 +13,15 @@ const Categories = forwardRef(
     const { data: dataCategories } = useFetch<CategoriesResponseI, null>(
       getCategories
     );
+
+    const { isDark } = useTheme();
     return dataCategories && dataCategories?.categories ? (
-      <div ref={ref} className={styles.categories}>
+      <div
+        ref={ref}
+        className={`${styles.categories} ${
+          isDark ? styles.dark : styles.light
+        }`}
+      >
         <button
           className={!activeCategory.length ? styles.active : styles.category}
           disabled={activeCategory === ""}
