@@ -1,10 +1,8 @@
-import useFetch from "../../helpers/hooks/useFetch";
 import BannersListWithSkeleton from "../BannersList/BannersList";
-import { getLatestNews } from "../../api/apiNews";
-import { ResponseI } from "../../api/types/NewsI";
+import { useGetLatestNewsQuery } from "../../store/services/newsApi";
 
 function LatestNews() {
-  const { data, isLoading } = useFetch<ResponseI, null>(getLatestNews);
+  const { data, isLoading } = useGetLatestNewsQuery(null);
   return (
     <section>
       <BannersListWithSkeleton

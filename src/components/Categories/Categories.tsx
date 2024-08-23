@@ -1,19 +1,15 @@
-import { getCategories } from "../../api/apiNews";
 import styles from "./styles.module.css";
-import { CategoriesPropsI } from "./types/CategoriesPropsI";
-import useFetch from "../../helpers/hooks/useFetch";
 import { ForwardedRef, forwardRef } from "react";
-import { CategoriesResponseI } from "../../api/types/NewsI";
 import { useTheme } from "../../context/theme";
-const Categories = forwardRef(
-  (
-    { activeCategory, setActiveCategory }: CategoriesPropsI,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
-    const { data: dataCategories } = useFetch<CategoriesResponseI, null>(
-      getCategories
-    );
+import { useGetCategoriesQuery } from "../../store/services/newsApi";
+import { useAppDispatch } from "../../store/store";
+import { setFilters } from "../../store/slices/newsSlice";
+import { CategoriesPropsI } from "./types/CategoriesPropsI";
 
+const Categories = forwardRef(
+  ({ activeCategory }: CategoriesPropsI, ref: ForwardedRef<HTMLDivElement>) => {
+    const { data: dataCategories } = useGetCategoriesQuery(null);
+    const dispatch = useAppDispatch();
     const { isDark } = useTheme();
     return dataCategories && dataCategories?.categories ? (
       <div
@@ -25,7 +21,7 @@ const Categories = forwardRef(
         <button
           className={!activeCategory.length ? styles.active : styles.category}
           disabled={activeCategory === ""}
-          onClick={() => setActiveCategory("category", "")}
+          onClick={() => dispatch(setFilters({ key: "category", value: "" }))}
         >
           All
         </button>
@@ -40,9 +36,11 @@ const Categories = forwardRef(
               }
               disabled={category === activeCategory}
               onClick={() =>
-                setActiveCategory(
-                  "category",
-                  category === "All" ? "" : category
+                dispatch(
+                  setFilters({
+                    key: "category",
+                    value: category === "All" ? "" : category,
+                  })
                 )
               }
               key={index}

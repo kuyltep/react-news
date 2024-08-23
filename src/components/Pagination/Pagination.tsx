@@ -1,15 +1,14 @@
 import { PaginationPropsI } from "./types/PaginationPropsI";
 import styles from "./styles.module.css";
 import { useTheme } from "../../context/theme";
-function Pagination({
-  activePage,
-  totalPages,
-  setActivePage,
-}: PaginationPropsI) {
+import { useDispatch } from "react-redux";
+import { setFilters } from "../../store/slices/newsSlice";
+function Pagination({ activePage, totalPages }: PaginationPropsI) {
+  const dispatch = useDispatch();
   const checkIsAvailablePage = (action: number) => {
     const resultPage = activePage + action;
     if (resultPage <= totalPages && resultPage >= 1) {
-      setActivePage("page_number", resultPage);
+      dispatch(setFilters({ key: "page_number", value: resultPage }));
     }
   };
 
@@ -35,7 +34,9 @@ function Pagination({
               className={
                 index + 1 === activePage ? styles.active : styles.default
               }
-              onClick={() => setActivePage("page_number", index + 1)}
+              onClick={() =>
+                dispatch(setFilters({ key: "page_number", value: index + 1 }))
+              }
             >
               {index + 1}
             </button>

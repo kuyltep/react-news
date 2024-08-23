@@ -1,45 +1,25 @@
 import { useState } from "react";
-import { PAGE_SIZE, TOTAL_PAGES } from "../../constants/constants";
+import { TOTAL_PAGES } from "../../constants/constants";
 import NewsList from "../News/NewsList/NewsList";
 import NewsFilters from "../NewsFilters/NewsFilters";
 import Pagination from "../Pagination/Pagination";
 import styles from "./styles.module.css";
 import useDebounce from "../../helpers/hooks/useDebounce";
-import { useFilters } from "../../helpers/hooks/useFilters";
-import useFetch from "../../helpers/hooks/useFetch";
-import { getNews } from "../../api/apiNews";
-import { ResponseI } from "../../api/types/NewsI";
-import { ApiParamsI } from "../../api/types/ApiParamsI";
+import { useGetNewsQuery } from "../../store/services/newsApi";
+import { useAppSelector } from "../../store/store";
 function NewsByFilters() {
   const [keywords, setKeywords] = useState<string>("");
   const debouncedKeywords = useDebounce(keywords, 1500);
-  const { filters, changeFilter } = useFilters({
-    endpoint: "search",
-    page_number: 1,
-    page_size: PAGE_SIZE,
-    category: "",
-    keywords: debouncedKeywords,
-  });
-  const { data: dataNews, isLoading } = useFetch<
-    ResponseI,
-    Partial<ApiParamsI>
-  >(getNews, {
+
+  const filters = useAppSelector((state) => state.news.filters);
+  const { data: dataNews, isLoading } = useGetNewsQuery({
     ...filters,
     keywords: debouncedKeywords,
   });
   return (
     <section className={styles.section}>
-      <NewsFilters
-        changeFilter={changeFilter}
-        filters={filters}
-        keywords={keywords}
-        setKeywords={setKeywords}
-      />
-      <Pagination
-        activePage={filters.page_number}
-        totalPages={TOTAL_PAGES}
-        setActivePage={changeFilter}
-      />
+      <NewsFilters keywords={keywords} setKeywords={setKeywords} />
+      <Pagination activePage={filters.page_number} totalPages={TOTAL_PAGES} />
       <NewsList news={dataNews?.news && dataNews.news} isLoading={isLoading} />
     </section>
   );
