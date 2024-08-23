@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CategoriesResponseI, ResponseI } from "../../api/types/NewsI";
-import { FiltersI } from "../../helpers/hooks/useFilters";
+import { ApiParamsI } from "../../api/types/ApiParamsI";
 
 const BASE_URL = import.meta.env.VITE_NEWS_API_BASE_URL;
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
@@ -11,7 +11,7 @@ export const newsApi = createApi({
     baseUrl: BASE_URL,
   }),
   endpoints: (builder) => ({
-    getNews: builder.query<ResponseI, FiltersI>({
+    getNews: builder.query<ResponseI, ApiParamsI>({
       keepUnusedDataFor: 0,
       query: (params) => {
         const { page_number, page_size, category, keywords } = params || {};

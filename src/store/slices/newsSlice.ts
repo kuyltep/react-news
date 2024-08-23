@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FiltersI } from "../../helpers/hooks/useFilters";
 import { PAGE_SIZE } from "../../constants/constants";
 import { NewsI } from "../../api/types/NewsI";
+import { ApiParamsI } from "../../api/types/ApiParamsI";
 interface State {
   news: NewsI[];
-  filters: FiltersI;
+  filters: ApiParamsI;
 }
 const initialState: State = {
   news: [],
